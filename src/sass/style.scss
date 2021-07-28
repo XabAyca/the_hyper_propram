@@ -1,1 +1,69 @@
-@import "~bootstrap/scss/bootstrap";
+@import './config' ;
+@import './header';
+@import './hero';
+@import './articleList';
+@import './footer';
+@import './gameDetail';
+
+*{
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+html{
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+body{
+  margin: 0;
+  padding: 0 ;
+  background-color: $background-color;
+  min-height: 100vh;  
+}
+h1{
+  font-size: $very-big;
+}
+h2{
+  font-size: $subtitle;
+  color:$secondary-color;
+  margin-bottom: $small;
+  ;
+}
+h3{
+  font-size: $big;
+  color:$primary-color;
+  margin-bottom: $small
+}
+p{
+  font-weight: map-get($font-weights, 400 );
+  color: $text-color;
+  line-height: 1.4rem;
+}
+header, .page-list{
+  padding: 0 5%;
+}
+
+.internal-link, .internal-link:visited {
+	text-decoration: none;
+	position: relative;
+	
+	&:after {
+		content: '';
+		height: 3px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background:$primary-color;
+		transition: 0.4s ease;
+	}
+
+	&:hover:after {
+		width: 100%;
+	}
+}
+.hidden-card{
+  display: none;
+}

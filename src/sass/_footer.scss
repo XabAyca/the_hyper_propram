@@ -1,0 +1,26 @@
+footer{
+  position: absolute;
+  bottom: 0;
+  font-weight: map-get($font-weights , 'bold' );
+  width: 100%;
+  position: relative;
+  padding: 25px 5% 25px;
+
+  &::before{
+    content: '';
+    color: $primary-color;
+    font-size: 0px;
+    position: absolute;
+    top:0px;
+    width: 150px;
+    height: $small;
+    background-color: $primary-color;
+    transition: width 1s ease-in-out, height 1s ease-in-out, background-color 2s linear 1s,;
+  }
+  &:hover::before{
+    width:100%;
+    left:-5%;
+    height: 120px;
+    background-color: $secondary-color;
+  }
+}

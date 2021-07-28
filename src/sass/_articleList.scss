@@ -1,0 +1,96 @@
+.articles, .similar-games{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  @include mobile{
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.cardGame{
+  width: 350px;
+  margin:20px 0;
+  & .logo{
+    margin-top: $small;
+  }
+  & a{
+    text-decoration: none;
+    font-size: $subtitle;
+    color: $secondary-color;
+    font-weight: map-get($font-weights , bold );
+  }
+  & .image{
+    width : 100%;
+    height: 275px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: $small;
+
+    
+    & img{
+      height: 100%;      
+    }
+
+    & .infos {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: $background-color;
+      opacity: 0;
+      transition: all 400ms;
+
+      &:hover{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+#show-more{
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin: 50px auto 100px;
+  font-size: $big;
+  padding: $small 40px;
+  @include btn
+}
+
+.infos{
+  overflow: hidden;
+  cursor: default;
+
+  & h4{
+    color:$text-color;
+    font-size: $subtitle;
+    margin: 0 0 $small;
+    font-weight: map-get($font-weights , 'regular' );
+  }
+  & p{
+    font-size: 0.8rem;
+  }
+}
+
+.logo a {
+  margin-right: 15px;
+}
+#selected-plat{
+  margin-top: 25px;
+  width: 250px;
+  padding: $small 20px;
+  outline: none;
+  color: $secondary-color;
+  font-size: $subtitle;
+  background-color: $primary-color;
+  border: none;
+  cursor: pointer;
+}
+
+.logo-platform{
+  transition: transform 1s ease-in-out;
+
+  &:hover{
+    transform:rotate(180deg);
+  }
+}

@@ -1,0 +1,42 @@
+header{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  @include mobile{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  
+  & h1 {
+    color: $primary-color;
+  }
+
+  & input{
+    border-radius: 50px;
+    width: 250px;
+    background-color: $background-color;
+    box-shadow: none;
+    border:1px solid $secondary-color;
+    padding: $small $small $small 50px;
+    font-size: 1.1rem;
+    color: $secondary-color;
+    outline: none;
+  }
+  & form{
+    position: relative;
+    margin-bottom: $small;
+    & svg{
+      position:absolute;
+      display: block;
+      top:8px;
+      left:15px;
+      cursor: pointer;
+      transition: 400ms;
+      &:hover{
+        transform: scale(1.2);
+      }
+    }
+  }
+}

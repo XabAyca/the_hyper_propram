@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+$primary-color: #D10A32;
+$secondary-color: #D6D6D6;
+$text-color:#C2C2C2;
+$background-color: #060606;
+$font-weights: (
+  "regular":400,
+  "bold":700
+);
+$very-big:3.5rem;
+$big:2rem;
+$subtitle:1.5rem;
+$small:10px;
+$mobile-width:800px;
+
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin btn(){
+  background-color: $primary-color;
+  font-weight: map-get($font-weights , 'bold' );
+  color: $secondary-color;
+  text-decoration: none;
+  width:200px;
+  cursor: pointer;
+  transition: 400ms;
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}

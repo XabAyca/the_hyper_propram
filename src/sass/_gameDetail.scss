@@ -1,0 +1,84 @@
+.hero-detail{
+  width: 100%;
+  position: relative;
+
+  & img{
+    width: 100%;
+  }
+  & .web-btn{
+    position: absolute;
+    right: 100px;
+    bottom: 75px;
+    font-size: 1.2rem;
+    padding: 15px 10px;
+    @include btn;
+  }
+}
+
+.article-detail{
+  padding: 0 5%;
+}
+
+.title-block{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @include mobile{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  & h1{
+    color: $secondary-color;
+    margin: 0;
+  }
+}
+.details{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  @include mobile{
+    flex-direction: column;
+    align-items:flex-start;
+  }
+  & a, a:active{
+    color: $secondary-color;
+  }
+
+  & div{
+    min-width: 250px;
+    max-width: 600px;
+  }
+}
+.stores{
+  & div{
+    margin: 10px 0; 
+  }
+  
+  & a{
+  font-weight: map-get($font-weights, 400 );
+  color: $text-color;
+  line-height: 1.4rem;
+  text-decoration: none;
+  position: relative;
+  text-decoration: underline 2px $primary-color;
+  }
+}
+.screenshots{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  @include mobile{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  & img{
+    height: 300px;
+    width: 450px;
+    object-fit: cover;
+    margin: 15px 0;
+  }
+}
