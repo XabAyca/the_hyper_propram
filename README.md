@@ -1,6 +1,6 @@
 # The Hyper Program
 
-![img](./src/images/presentation.png)  
+![img](./src/images/presentation1.png)  
 
 ## Exercise
 
