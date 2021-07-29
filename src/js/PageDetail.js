@@ -17,12 +17,19 @@ const PageDetail = (argument = "") => {
           // Create all games details & internal link
           let articleDOM = document.querySelector(".page-detail .article-detail");
           document.querySelector("div.hero-detail").innerHTML=`<img src=${background_image}>`
-          document.querySelector("div.hero-detail").innerHTML+=`<a class=web-btn target='_blank' href=${website}>Check Website  ▶</a>`
+          if(website==''){
+            document.querySelector("div.hero-detail").innerHTML+=`<a class=web-btn >No Website yet ...</a>`
+          }else{
+            document.querySelector("div.hero-detail").innerHTML+=`<a class=web-btn target='_blank' href=${website}>Check Website  ▶</a>`
+          };
           articleDOM.querySelector("h1.title").innerHTML = `${name},`;
           articleDOM.querySelector("h3.votes").innerHTML = `${rating}/5 - ${ratings_count} votes`;
-          articleDOM.querySelector("div.description").innerHTML += description; 
-          articleDOM.querySelector(".release").innerHTML += `<p>${moment(released).format('ll')}</p>`;
-          
+          articleDOM.querySelector("div.description").innerHTML += description;
+          if(released==null){
+            articleDOM.querySelector(".release").innerHTML += "<p>Coming soon...</p>";
+          }else{ 
+            articleDOM.querySelector(".release").innerHTML += `<p>${moment(released).format('ll')}</p>`;
+          }
           let allDevelopers = []
           developers.forEach(element => {
             allDevelopers.push(`<a class='internal-link' href='#pagelist/&developers=${element.id}'>${element.name}</a>`)
@@ -37,7 +44,6 @@ const PageDetail = (argument = "") => {
           
           let allPublishers = [] 
           publishers.forEach(element => {
-
             allPublishers.push(`<a class='internal-link' href='#pagelist/&publishers=${element.id}'>${element.name}</a>`)
           }); 
           articleDOM.querySelector(".publisher").innerHTML += `<p>${allPublishers.join(", ")}</p>`; 
@@ -73,16 +79,18 @@ const PageDetail = (argument = "") => {
             for(let i=0; i<4;i++){
               articleDOM.querySelector(".screenshots").innerHTML += `<img src=${response.results[i].image}>`
             }
+            document.querySelector('.trailer').setAttribute('poster',`${response.results[4].image}`)
           })
           fetch(`https://api.rawg.io/api/games/${response.id}/game-series?`+api_key)
           .then((response) => response.json())
           .then((response) => {
-            for(let i=0; i<6;i++){
-              let tags = [];
-              response.results[i].tags.forEach(tag=> tags.push(tag.name))
-              tags = tags.join(", ")
-              let logos = allLogos(response.results[i].parent_platforms)
-              articleDOM.querySelector(".similar-games").innerHTML +=
+            if(response.results.length > 1){
+              for(let i=0; i<6;i++){
+                let tags = [];
+                response.results[i].tags.forEach(tag=> tags.push(tag.name))
+                tags = tags.join(", ")
+                let logos = allLogos(response.results[i].parent_platforms)
+                articleDOM.querySelector(".similar-games").innerHTML +=
                 `<div class="cardGame">
                   <div class="image">
                     <div class='infos'>
@@ -97,6 +105,9 @@ const PageDetail = (argument = "") => {
                     ${logos}
                   </div>
                 </div>`
+              }
+            }else{
+              articleDOM.querySelector(".similar-games").innerHTML += '<p>No similar game found ...</p>'
             }
           })
         });
@@ -120,8 +131,8 @@ const PageDetail = (argument = "") => {
             <h2>Description</h2>  
           </div>
           <div class='details'>
-            <div>
-              <div class='details'>
+            <div class='block-details'>
+              <div class='top-details'>
                 <div class=release>
                 <h2>Release Date</h2>
                 </div>
@@ -135,8 +146,8 @@ const PageDetail = (argument = "") => {
                 </div>
               </div>
             </div>
-            <div>
-              <div class='details'>
+            <div class='block-details'>
+              <div class='top-details'>
                 <div class=platforms>
                 <h2>Platforms</h2>
                 </div>
@@ -153,6 +164,12 @@ const PageDetail = (argument = "") => {
           </div>
           <h3>BUY</h3>
           <div class=stores>
+          </div>
+          <h3>TRAILER</h3>
+          <div>
+            <video class='trailer' controls="false" poster='' width="100%" src="./src/images/thp.mp4"  type="video/mp4">
+              Sorry, your browser doesn't support embedded videos.
+            </video>
           </div>
           <h3>SCREENSHOTS</h3>
           <div class=screenshots>

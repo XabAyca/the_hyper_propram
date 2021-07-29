@@ -28,6 +28,9 @@
     align-items: center;
     justify-content: center;
   }
+  & h3{
+    min-width:300px;
+  }
   
   & h1{
     color: $secondary-color;
@@ -39,17 +42,35 @@
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: flex-start;
+  
   @include mobile{
     flex-direction: column;
-    align-items:flex-start;
-  }
-  & a, a:active{
-    color: $secondary-color;
+    align-items:center;
   }
 
-  & div{
-    min-width: 200px;
-    max-width: 600px;
+  & .block-details{
+    width: 50%;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    & .top-details{
+      display: flex;
+      flex-flow: row wrap;
+      max-width: 100%;
+      
+      & .release, .developer, .platforms, .publisher{
+        width:50% ;
+      }
+    }
+  }
+
+  & a, a:active{
+    color: $secondary-color;
   }
 }
 .stores{
