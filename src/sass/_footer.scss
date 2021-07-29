@@ -3,7 +3,6 @@ footer{
   bottom: 0;
   font-weight: map-get($font-weights , 'bold' );
   width: 100%;
-  position: relative;
   padding: 25px 5% 25px;
 
   &::before{

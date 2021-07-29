@@ -1,4 +1,5 @@
 header{
+  position: relative;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -6,6 +7,12 @@ header{
   @include mobile{
     flex-direction: column;
     align-items: center;
+  }
+  & .logo-pgm{
+    position: absolute;
+    z-index: -1;
+    transform: rotate(-35deg);
+    left:50%
   }
 
   

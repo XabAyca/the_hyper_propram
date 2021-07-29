@@ -10,6 +10,7 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./src/sass/style.scss (2) ***!
   \****************************************************************************************************************************************************************************************/
 header {
+  position: relative;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -20,6 +21,12 @@ header {
     flex-direction: column;
     align-items: center;
   }
+}
+header .logo-pgm {
+  position: absolute;
+  z-index: -1;
+  transform: rotate(-35deg);
+  left: 50%;
 }
 header h1 {
   color: #D10A32;
@@ -166,7 +173,6 @@ footer {
   bottom: 0;
   font-weight: 700;
   width: 100%;
-  position: relative;
   padding: 25px 5% 25px;
 }
 footer::before {
@@ -378,4 +384,8 @@ header, .page-list {
 
 .hidden-card {
   display: none;
+}
+
+#pageContent {
+  margin-bottom: 100px;
 }
