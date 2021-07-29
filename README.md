@@ -19,7 +19,7 @@ add a `.env` file with your `API_KEY=key<YOUR KEY>`
 
 run `npm run build`  
 
-open `index.html` file in our browser  
+open `index.html` file in your browser  
 
 Enjoy...  
 
