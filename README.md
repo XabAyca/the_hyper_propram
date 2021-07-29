@@ -15,6 +15,8 @@
 
 `git clone https://github.com/XabAyca/the_hyper_propram.git`  
 
+add a `.env` file with you`API_KEY=key<YOUR KEY>`  
+
 run `npm run build`  
 
 open `index.html` file in our browser  
