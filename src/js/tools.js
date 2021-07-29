@@ -90,23 +90,22 @@ const storeIcons = {
     "<img data-id='10' src='src/images/epic.svg' alt='' >",
 };
 
+const getStudios = ()=>{
+  let studios = document.querySelectorAll("#studios");
+  studios.forEach((studio) => {
+    let id = studio.innerHTML;
+    fetch(`https://api.rawg.io/api/games/${id}?`+api_key)
+      .then((response) => response.json())
+      .then((response) => {
+        let toInsert = [];
+        if (response.developers) {
+          response.developers.forEach((developer) => {
+            toInsert.push(developer.name);
+          });
+        }
+        studio.innerHTML = toInsert.join(', ');
+      });
+  });
+}
 
-///// TO DO
-// const getStudios = (id)=>{
-//   let result =''
-//   fetch(`https://api.rawg.io/api/games/${id}?`+api_key)
-//   .then((response) => response.json())
-//   .then((response) => {
-//     let studios = [];
-//     response.developers.forEach(developer=>{
-//       let temp = developer.name
-//       studios.push(temp)
-//     })
-//     result = studios.join(', ')
-//     return result
-//   })
-// }
-
-
-
-export {allLogos,searchGame,showMore,api_key,searchPlatformList,storeIcons}
+export {allLogos,searchGame,showMore,api_key,searchPlatformList,storeIcons,getStudios}

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { allLogos,showMore,searchGame,api_key,searchPlatformList} from './tools';
+import { allLogos,showMore,searchGame,api_key,searchPlatformList,getStudios} from './tools';
 import moment from "moment";
 
 const today = dayjs().format('YYYY-MM-DD');
@@ -20,33 +20,36 @@ const PageList = (argument = "") => {
       .then((response) => response.json())
       .then((response) => {
         response.results.forEach((article) => {
-        let tags = [];
-        article.tags.forEach(tag=> tags.push(tag.name))
+
+          let tags = [];
+          article.tags.forEach(tag=> tags.push(tag.name))
           tags = tags.join(", ")
+          
           let logos = allLogos(article.parent_platforms)
           articles += `
-            <div class="cardGame hidden-card">
-              <div class="image">
-                <div class='infos'>
-                  <h4>${moment(article.released).format('ll')}</h4>
-                  <h4>${article.rating}/5 - ${article.ratings_count} votes</h4>
-                  <p>${tags}</p>
-                </div>
-                <img src=${article.background_image}>
+          <div class="cardGame hidden-card">
+            <div class="image">
+              <div class='infos'>
+                <h4>${moment(article.released).format('ll')}</h4>
+                <h4 id='studios'>${article.id}</h4>
+                <h4>${article.rating}/5 - ${article.ratings_count} votes</h4>
+                <p>${tags}</p>
               </div>
-              <a class=internal-link href="#pagedetail/${article.id}">${article.name}</a>
-              <div class='logo'>
-                ${logos}
-              </div>
+              <img src=${article.background_image}>
             </div>
-            `;
+            <a class=internal-link href="#pagedetail/${article.id}">${article.name}</a>
+            <div class='logo'>
+              ${logos}
+            </div>
+          </div>`;
         });
+        
         document.querySelector(".page-list .articles").innerHTML += articles;
-        document.querySelector(".btn-more").innerHTML =`<a id=show-more>Show more</a>`
-        document.querySelector('#show-more').addEventListener('click',showMore)
-        
+        document.querySelector(".btn-more").innerHTML =`<a id=show-more>Show more</a>`;
+        document.querySelector('#show-more').addEventListener('click',showMore);
+        getStudios();
+
         let cardList = document.getElementsByClassName('cardGame')
-        
         for(let i=0; i<9;i++){
           cardList[i].classList.remove('hidden-card')
         }
