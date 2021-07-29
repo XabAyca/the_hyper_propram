@@ -249,7 +249,7 @@ footer:hover::before {
   color: #D6D6D6;
 }
 .details div {
-  min-width: 250px;
+  min-width: 200px;
   max-width: 600px;
 }
 
@@ -261,7 +261,7 @@ footer:hover::before {
   line-height: 1.4rem;
   text-decoration: none;
   position: relative;
-  text-decoration: underline 2px #D10A32;
+  text-decoration: underline 3px #D10A32;
 }
 
 .screenshots {
@@ -282,9 +282,22 @@ footer:hover::before {
   margin: 15px 0;
 }
 
+.block-stores {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+}
+.block-stores div {
+  margin-right: 10px;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
 }
 
 html {

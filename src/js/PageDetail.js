@@ -1,4 +1,4 @@
-import { allLogos,api_key } from './tools'
+import { allLogos,api_key,storeIcons } from './tools'
 import moment from "moment";
 
 const PageDetail = (argument = "") => {
@@ -13,35 +13,60 @@ const PageDetail = (argument = "") => {
         .then((response) => response.json())
         .then((response) => {
           let {stores, tags, genres, publishers, platforms ,rating, ratings_count, website, background_image, name, released, description, developers } = response;
-
+          
+          // Create all games details & internal link
           let articleDOM = document.querySelector(".page-detail .article-detail");
           document.querySelector("div.hero-detail").innerHTML=`<img src=${background_image}>`
           document.querySelector("div.hero-detail").innerHTML+=`<a class=web-btn target='_blank' href=${website}>Check Website  ▶</a>`
           articleDOM.querySelector("h1.title").innerHTML = `${name},`;
           articleDOM.querySelector("h3.votes").innerHTML = `${rating}/5 - ${ratings_count} votes`;
           articleDOM.querySelector("div.description").innerHTML += description; 
-          articleDOM.querySelector(".release").innerHTML += `<p>${released}</p>`;
+          articleDOM.querySelector(".release").innerHTML += `<p>${moment(released).format('ll')}</p>`;
+          
           let allDevelopers = []
           developers.forEach(element => {
             allDevelopers.push(`<a class='internal-link' href='#pagelist/&developers=${element.id}'>${element.name}</a>`)
           }); 
-          console.log(allDevelopers)
           articleDOM.querySelector(".developer").innerHTML += `<p>${allDevelopers.join(", ")}</p>`;
+          
           let allPlatforms = [] 
-          platforms.forEach(element => allPlatforms.push(`${element.platform.name}`)); 
+          platforms.forEach(element =>{
+            allPlatforms.push(`<a class='internal-link' href='#pagelist/&platforms=${element.platform.id}'>${element.platform.name}</a>`)
+          }); 
           articleDOM.querySelector(".platforms").innerHTML += `<p>${allPlatforms.join(", ")}</p>`; 
+          
           let allPublishers = [] 
-          publishers.forEach(element => allPublishers.push(element.name)); 
+          publishers.forEach(element => {
+
+            allPublishers.push(`<a class='internal-link' href='#pagelist/&publishers=${element.id}'>${element.name}</a>`)
+          }); 
           articleDOM.querySelector(".publisher").innerHTML += `<p>${allPublishers.join(", ")}</p>`; 
+
           let allGenre = [] 
-          genres.forEach(element => allGenre.push(element.name)); 
-          articleDOM.querySelector(".genre").innerHTML += `<p>${allGenre.join(", ")}</p>`; 
+          genres.forEach(element => {
+            allGenre.push(`<a class='internal-link' href='#pagelist/&genres=${element.id}'>${element.name}</a>`)
+          }); 
+          articleDOM.querySelector(".genre").innerHTML += `<p>${allGenre.join(", ")}</p>`;
+
           let allTags = [] 
-          tags.forEach(element => allTags.push(element.name)); 
+          tags.forEach(element => {
+            allTags.push(`<a class='internal-link' href='#pagelist/&tags=${element.id}'>${element.name}</a>`)
+          }); 
           articleDOM.querySelector(".tags").innerHTML += `<p>${allTags.join(", ")}</p>`;
+          
           stores.forEach(store=>{
-            articleDOM.querySelector(".stores").innerHTML += `<div><a target='_blank' href=http://${store.store.domain}>${store.store.name}</a></div>`;
+            articleDOM.querySelector(".stores").innerHTML += `
+              <div class='block-stores'>
+                <div>
+                  <a target='_blank' class='store' href=http://${store.store.domain}>${store.store.name} </a> 
+                </div>  
+                <div>
+                  ${storeIcons[store.store.slug]}
+                </div>
+              </div>`;
           });
+
+          // Fetch screenshots
           fetch(`https://api.rawg.io/api/games/${response.id}/screenshots?`+api_key)
           .then((response) => response.json())
           .then((response) => {
@@ -61,7 +86,7 @@ const PageDetail = (argument = "") => {
                 `<div class="cardGame">
                   <div class="image">
                     <div class='infos'>
-                      <h4>${moment(response.results[i].released).format("MMM Do, YY")}</h4>
+                      <h4>${moment(response.results[i].released).format('ll')}</h4>
                       <h4>${response.results[i].rating}/5 - ${response.results[i].ratings_count} votes</h4>
                       <p>${tags}</p>
                     </div>
@@ -95,25 +120,35 @@ const PageDetail = (argument = "") => {
             <h2>Description</h2>  
           </div>
           <div class='details'>
-            <div class=release>
-              <h2>Release Date</h2>
+            <div>
+              <div class='details'>
+                <div class=release>
+                <h2>Release Date</h2>
+                </div>
+                <div class=developer>
+                <h2>Developer</h2>
+                </div>
+              </div>
+              <div>
+                <div class=genre>
+                <h2>Genre</h2>
+                </div>
+              </div>
             </div>
-            <div class=developer>
-            <h2>Developer</h2>
-            </div>
-            <div class=platforms>
-            <h2>Platforms</h2>
-            </div>
-            <div class=publisher>
-            <h2>Publisher</h2>
-            </div>
-          </div>
-          <div class='details'>
-            <div class=genre>
-            <h2>Genre</h2>
-            </div>
-            <div class=tags>
-            <h2>Tags</h2>
+            <div>
+              <div class='details'>
+                <div class=platforms>
+                <h2>Platforms</h2>
+                </div>
+                <div class=publisher>
+                <h2>Publisher</h2>
+                </div>
+              </div>
+              <div>
+                <div class=tags>
+                <h2>Tags</h2>
+                </div>
+              </div>
             </div>
           </div>
           <h3>BUY</h3>

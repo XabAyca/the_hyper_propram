@@ -48,7 +48,7 @@
   }
 
   & div{
-    min-width: 250px;
+    min-width: 200px;
     max-width: 600px;
   }
 }
@@ -63,7 +63,7 @@
   line-height: 1.4rem;
   text-decoration: none;
   position: relative;
-  text-decoration: underline 2px $primary-color;
+  text-decoration: underline 3px $primary-color;
   }
 }
 .screenshots{
@@ -80,5 +80,14 @@
     width: 450px;
     object-fit: cover;
     margin: 15px 0;
+  }
+}
+.block-stores{
+  display: flex;
+  flex-flow: row wrap;
+  align-items:stretch;
+  
+  & div{
+    margin-right: $small;
   }
 }

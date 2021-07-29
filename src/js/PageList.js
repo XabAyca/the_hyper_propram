@@ -12,9 +12,9 @@ const PageList = (argument = "") => {
     let articles = "";
 
     const fetchList = (url, argument) => {
-      let finalURL = url + api_key + `&dates=${today},${oneYearofToday}&ordering=-added&page_size=27`;
+      let finalURL = url + api_key + `&dates=${today},${oneYearofToday}&page_size=27`;
       if (argument) {
-        finalURL = url + api_key + argument+ `&ordering=-added&page_size=27`;
+        finalURL = url + api_key + argument+ `&page_size=27`;
       }
       fetch(`${finalURL}`)
       .then((response) => response.json())
@@ -28,7 +28,7 @@ const PageList = (argument = "") => {
             <div class="cardGame hidden-card">
               <div class="image">
                 <div class='infos'>
-                  <h4>${moment(article.released).format("MMM Do, YY")}</h4>
+                  <h4>${moment(article.released).format('ll')}</h4>
                   <h4>${article.rating}/5 - ${article.ratings_count} votes</h4>
                   <p>${tags}</p>
                 </div>
