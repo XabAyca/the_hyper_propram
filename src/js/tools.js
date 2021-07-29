@@ -1,6 +1,6 @@
 import { PageList } from "./PageList";
 
-const api_key ='key=8ccee3eb357e48fab74975641971037e'
+const api_key = process.env.API_KEY
 
 const allLogos = (platform)=>{
   let list = []
